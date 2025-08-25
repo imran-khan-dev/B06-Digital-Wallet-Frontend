@@ -28,6 +28,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useRegisterMutation } from "@/redux/features/auth/auth.api";
+import { toast } from "sonner";
 
 const registerSchema = z
   .object({
@@ -62,6 +64,8 @@ export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const [register] = useRegisterMutation();
+
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -75,9 +79,24 @@ export function RegisterForm({
   });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function onSubmit(data: any) {
-    console.log("Form submitted:", data);
-  }
+  const onSubmit = async (data: z.infer<typeof registerSchema>) => {
+    const userInfo = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      role: data.role,
+      password: data.password,
+    };
+
+    console.log(userInfo)
+    try {
+      const result = await register(userInfo).unwrap();
+      toast.success("User created successfully");
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
