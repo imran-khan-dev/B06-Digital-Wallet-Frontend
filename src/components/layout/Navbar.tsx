@@ -1,16 +1,22 @@
 // import Logo from "@/registry/default/components/navbar-components/logo"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
+import {
+  useLogoutMutation,
+  useUserInfoQuery,
+} from "@/redux/features/auth/auth.api";
+import { Link } from "react-router";
+import { toast } from "sonner";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -18,9 +24,26 @@ const navigationLinks = [
   { href: "#", label: "Features" },
   { href: "#", label: "Pricing" },
   { href: "#", label: "About" },
-]
+];
 
 export default function Component() {
+  const { data } = useUserInfoQuery(undefined);
+  console.log(data);
+
+  const [logout] = useLogoutMutation();
+
+  const handleLogout = async () => {
+    try {
+      logout(undefined);
+      toast.success("Logout successfully");
+    } catch (error) {
+      console.log(error);
+    }
+
+    // await logout(undefined);
+    // dispatch(authApi.util.resetApiState());
+  };
+
   return (
     <header className="border-b px-4 md:px-6">
       <div className="flex h-16 items-center justify-between gap-4">
@@ -104,11 +127,22 @@ export default function Component() {
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
-          <Button asChild size="sm" className="text-sm">
-            <a href="#">Login</a>
-          </Button>
+          {data?.data?.email && (
+            <Button
+              onClick={handleLogout}
+              variant="outline"
+              className="text-sm cursor-pointer"
+            >
+              Logout
+            </Button>
+          )}
+          {!data?.data?.email && (
+            <Button asChild className="text-sm">
+              <Link to="/login">Login</Link>
+            </Button>
+          )}
         </div>
       </div>
     </header>
-  )
+  );
 }
