@@ -15,18 +15,24 @@ import Password from "@/components/ui/Password";
 
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
+import { useNavigate } from "react-router";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const navigate = useNavigate();
   const form = useForm();
   const [login] = useLoginMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       const res = await login(data).unwrap();
       console.log(res);
-      toast.success("Login successfully");
+      if (res.success) {
+        toast.success("Login successfully");
+        navigate("/");
+      }
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error(err);
@@ -37,7 +43,6 @@ export function LoginForm({
     }
   };
 
-  
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>

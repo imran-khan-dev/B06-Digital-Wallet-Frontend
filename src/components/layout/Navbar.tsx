@@ -12,9 +12,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import {
+  authApi,
   useLogoutMutation,
   useUserInfoQuery,
 } from "@/redux/features/auth/auth.api";
+import { useAppDispatch } from "@/redux/hooks";
 import { Link } from "react-router";
 import { toast } from "sonner";
 
@@ -28,20 +30,19 @@ const navigationLinks = [
 
 export default function Component() {
   const { data } = useUserInfoQuery(undefined);
+  const dispatch = useAppDispatch();
   console.log(data);
 
   const [logout] = useLogoutMutation();
 
   const handleLogout = async () => {
     try {
-      logout(undefined);
+      await logout(undefined);
+      dispatch(authApi.util.resetApiState());
       toast.success("Logout successfully");
     } catch (error) {
       console.log(error);
     }
-
-    // await logout(undefined);
-    // dispatch(authApi.util.resetApiState());
   };
 
   return (
