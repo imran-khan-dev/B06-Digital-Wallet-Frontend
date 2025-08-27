@@ -1,6 +1,10 @@
-import AllUsers from "@/pages/Admin/ManageUsers";
-import Analytics from "@/pages/Admin/Analytics";
 import type { ISidebarItem } from "@/types";
+import { lazy } from "react";
+
+const TopUp = lazy(() => import("@/pages/Agent/TopUp"));
+const CashOut = lazy(() => import("@/pages/Agent/CashOut"));
+const AgentTransactions = lazy(() => import("@/pages/Agent/AgentTransactions"));
+const AgentEditProfile = lazy(() => import("@/pages/Agent/AgentEditProfile"));
 
 export const agentSidebarItems: ISidebarItem[] = [
   {
@@ -9,22 +13,22 @@ export const agentSidebarItems: ISidebarItem[] = [
       {
         title: "Top Up",
         url: "/agent/top-up",
-        component: Analytics,
+        component: TopUp,
       },
       {
         title: "Cash Out for users",
         url: "/agent/cash-out-users",
-        component: AllUsers,
+        component: CashOut,
       },
       {
-        title: "My Transaction List",
-        url: "/agent/transaction List",
-        component: AllUsers,
+        title: "Agent Transaction List",
+        url: "/agent/agent-transaction",
+        component: AgentTransactions,
       },
       {
         title: "Edit Profile",
         url: "/agent/edit-profile",
-        component: AllUsers,
+        component: AgentEditProfile,
       },
     ],
   },

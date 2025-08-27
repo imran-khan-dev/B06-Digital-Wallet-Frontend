@@ -1,8 +1,11 @@
-import AllUsers from "@/pages/Admin/ManageUsers";
 import type { ISidebarItem } from "@/types";
-import ManageUsers from "@/pages/Admin/ManageUsers";
-import MangeAgents from "@/pages/Admin/MangeAgents";
-import ManageWallets from "@/pages/Admin/ManageWallets";
+import { lazy } from "react";
+
+const ManageUsers = lazy(() => import("@/pages/Admin/ManageUsers"));
+const MangeAgents = lazy(() => import("@/pages/Admin/MangeAgents"));
+const ManageWallets = lazy(() => import("@/pages/Admin/ManageWallets"));
+const EditProfile = lazy(() => import("@/pages/Admin/AdminEditProfile"));
+const AllTransactions = lazy(() => import("@/pages/Admin/AllTransactions"));
 
 export const adminSidebarItems: ISidebarItem[] = [
   {
@@ -26,12 +29,12 @@ export const adminSidebarItems: ISidebarItem[] = [
       {
         title: "View All Transactions",
         url: "/admin/all-transactions",
-        component: AllUsers,
+        component: AllTransactions,
       },
       {
         title: "Edit Profile",
         url: "/admin/edit-profile",
-        component: AllUsers,
+        component: EditProfile,
       },
     ],
   },

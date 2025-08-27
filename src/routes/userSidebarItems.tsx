@@ -1,35 +1,46 @@
-import AllUsers from "@/pages/Admin/ManageUsers";
-import Analytics from "@/pages/Admin/Analytics";
+import UserOverview from "@/pages/User/UserOverview";
 import type { ISidebarItem } from "@/types";
+import { lazy } from "react";
+
+const CashIn = lazy(() => import("@/pages/User/CashIn"));
+const CashOut = lazy(() => import("@/pages/Agent/CashOut"));
+const SendMoney = lazy(() => import("@/pages/User/SendMoney"));
+const UserTransactions = lazy(() => import("@/pages/User/UserTransactions"));
+const UserEditProfile = lazy(() => import("@/pages/User/UserEditProfile"));
 
 export const userSidebarItems: ISidebarItem[] = [
   {
     title: "Dashboard",
     items: [
       {
+        title: "Overview",
+        url: "/user/overview",
+        component: UserOverview,
+      },
+      {
         title: "Cash In",
         url: "/user/cash-in",
-        component: Analytics,
+        component: CashIn,
       },
       {
         title: "Cash Out",
         url: "/user/cash-out",
-        component: AllUsers,
+        component: CashOut,
       },
       {
         title: "Send Money",
         url: "/user/send-money",
-        component: AllUsers,
+        component: SendMoney,
       },
       {
         title: "Transaction History",
         url: "/user/transactions-history",
-        component: AllUsers,
+        component: UserTransactions,
       },
       {
         title: "Edit Profile",
         url: "/user/edit-profile",
-        component: AllUsers,
+        component: UserEditProfile,
       },
     ],
   },
