@@ -2,33 +2,28 @@ import AllUsers from "@/pages/Admin/ManageUsers";
 import Analytics from "@/pages/Admin/Analytics";
 import type { ISidebarItem } from "@/types";
 
-export const userSidebarItems: ISidebarItem[] = [
+export const agentSidebarItems: ISidebarItem[] = [
   {
     title: "Dashboard",
     items: [
       {
-        title: "Cash In",
-        url: "/user/cash-in",
+        title: "Top Up",
+        url: "/agent/top-up",
         component: Analytics,
       },
       {
-        title: "Cash Out",
-        url: "/user/cash-out",
+        title: "Cash Out for users",
+        url: "/agent/cash-out-users",
         component: AllUsers,
       },
       {
-        title: "Send Money",
-        url: "/user/send-money",
-        component: AllUsers,
-      },
-      {
-        title: "Transaction History",
-        url: "/user/transactions-history",
+        title: "My Transaction List",
+        url: "/agent/transaction List",
         component: AllUsers,
       },
       {
         title: "Edit Profile",
-        url: "/user/edit-profile",
+        url: "/agent/edit-profile",
         component: AllUsers,
       },
     ],

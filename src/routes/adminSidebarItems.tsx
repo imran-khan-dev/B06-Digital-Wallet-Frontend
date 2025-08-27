@@ -1,6 +1,8 @@
-import AllUsers from "@/pages/Admin/AllUsers";
-import Analytics from "@/pages/Admin/Analytics";
+import AllUsers from "@/pages/Admin/ManageUsers";
 import type { ISidebarItem } from "@/types";
+import ManageUsers from "@/pages/Admin/ManageUsers";
+import MangeAgents from "@/pages/Admin/MangeAgents";
+import ManageWallets from "@/pages/Admin/ManageWallets";
 
 export const adminSidebarItems: ISidebarItem[] = [
   {
@@ -9,24 +11,24 @@ export const adminSidebarItems: ISidebarItem[] = [
       {
         title: "Manage Users",
         url: "/admin/manage-users",
-        component: Analytics,
+        component: ManageUsers,
       },
       {
         title: "Manage Agents",
         url: "/admin/manage-agents",
-        component: AllUsers,
+        component: MangeAgents,
       },
       {
         title: "Manage Wallets",
-        url: "/admin/manage-Wallets",
-        component: AllUsers,
+        url: "/admin/manage-wallets",
+        component: ManageWallets,
       },
       {
         title: "View All Transactions",
-        url: "/admin/manage-Wallets",
+        url: "/admin/all-transactions",
         component: AllUsers,
       },
-       {
+      {
         title: "Edit Profile",
         url: "/admin/edit-profile",
         component: AllUsers,

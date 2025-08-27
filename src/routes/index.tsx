@@ -4,10 +4,10 @@ import About from "@/pages/About";
 import Login from "@/pages/Login";
 import Registration from "@/pages/Registration";
 import DashboardLayout from "@/components/layout/DashboardLayout";
-import UserOverview from "@/pages/User/UserOverview";
 import AgentOverview from "@/pages/Agent/AgentOverview";
 import { generateRoutes } from "@/utils/generateRoutes";
 import { adminSidebarItems } from "./adminSidebarItems";
+import { userSidebarItems } from "./userSidebarItems";
 
 export const router = createBrowserRouter([
   {
@@ -36,12 +36,7 @@ export const router = createBrowserRouter([
   {
     Component: DashboardLayout,
     path: "/user",
-    children: [
-      {
-        Component: UserOverview,
-        path: "overview",
-      },
-    ],
+    children: [...generateRoutes(userSidebarItems)],
   },
   {
     Component: DashboardLayout,
