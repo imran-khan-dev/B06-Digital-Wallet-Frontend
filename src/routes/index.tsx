@@ -8,6 +8,10 @@ import AgentOverview from "@/pages/Agent/AgentOverview";
 import { generateRoutes } from "@/utils/generateRoutes";
 import { adminSidebarItems } from "./adminSidebarItems";
 import { userSidebarItems } from "./userSidebarItems";
+import Unauthorized from "@/pages/Unauthorized";
+import { withAuth } from "@/utils/withAuth";
+import type { TRole } from "@/types";
+import { role } from "@/constants/role";
 
 export const router = createBrowserRouter([
   {
@@ -29,17 +33,17 @@ export const router = createBrowserRouter([
     path: "/Register",
   },
   {
-    Component: DashboardLayout,
+    Component: withAuth(DashboardLayout, role.admin as TRole),
     path: "/admin",
     children: [...generateRoutes(adminSidebarItems)],
   },
   {
-    Component: DashboardLayout,
+    Component: withAuth(DashboardLayout, role.user as TRole),
     path: "/user",
     children: [...generateRoutes(userSidebarItems)],
   },
   {
-    Component: DashboardLayout,
+    Component: withAuth(DashboardLayout, role.agent as TRole),
     path: "/agent",
     children: [
       {
@@ -47,5 +51,9 @@ export const router = createBrowserRouter([
         path: "overview",
       },
     ],
+  },
+  {
+    Component: Unauthorized,
+    path: "/unauthorized",
   },
 ]);
