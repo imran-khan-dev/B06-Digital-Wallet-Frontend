@@ -1,9 +1,9 @@
-import { UserOverviewData } from "@/components/modules/user/UserOverviewData";
+import { DashboardOverviewData } from "@/components/DashboardOverviewData";
 
 export default function UserOverview() {
   return (
     <div>
-      <UserOverviewData />
+      <DashboardOverviewData />
     </div>
   );
 }

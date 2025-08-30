@@ -1,6 +1,6 @@
 import { useGetMyWalletQuery } from "@/redux/features/auth/auth.api";
 
-export function UserOverviewData() {
+export function DashboardOverviewData() {
   const { data, isLoading } = useGetMyWalletQuery(undefined);
   if (isLoading) return <p>Loading...</p>;
 

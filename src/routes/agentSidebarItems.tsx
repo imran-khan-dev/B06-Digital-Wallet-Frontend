@@ -1,3 +1,4 @@
+import AgentOverview from "@/pages/Agent/AgentOverview";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
@@ -10,6 +11,11 @@ export const agentSidebarItems: ISidebarItem[] = [
   {
     title: "Dashboard",
     items: [
+      {
+        title: "Overview",
+        url: "/agent/overview",
+        component: AgentOverview,
+      },
       {
         title: "Top Up",
         url: "/agent/top-up",
