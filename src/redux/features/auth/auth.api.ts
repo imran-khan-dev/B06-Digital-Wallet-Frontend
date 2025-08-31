@@ -30,9 +30,41 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["USER"],
     }),
+    allUserInfo: builder.query({
+      query: () => ({
+        url: "/user/all-users",
+        method: "GET",
+      }),
+      providesTags: ["USER"],
+    }),
+    allAgentInfo: builder.query({
+      query: () => ({
+        url: "/user/all-agents",
+        method: "GET",
+      }),
+      providesTags: ["USER"],
+    }),
     getMyWallet: builder.query({
       query: () => ({
         url: "/wallet/my-wallet",
+        method: "GET",
+      }),
+    }),
+    getAllWallet: builder.query({
+      query: () => ({
+        url: "/wallet/all-wallets",
+        method: "GET",
+      }),
+    }),
+    transactionSum: builder.query({
+      query: () => ({
+        url: "/transaction/transaction-sum",
+        method: "GET",
+      }),
+    }),
+    getMyRecentTransactions: builder.query({
+      query: (userId) => ({
+        url: `/transaction/transaction-history/${userId}?limit=5`,
         method: "GET",
       }),
     }),
@@ -43,6 +75,11 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useUserInfoQuery,
+  useAllUserInfoQuery,
+  useAllAgentInfoQuery,
+  useGetAllWalletQuery,
+  useTransactionSumQuery,
+  useGetMyRecentTransactionsQuery,
   useLogoutMutation,
   useGetMyWalletQuery,
 } = authApi;

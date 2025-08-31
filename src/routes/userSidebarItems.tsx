@@ -1,4 +1,4 @@
-import UserOverview from "@/pages/User/UserOverview";
+import UserOverview from "@/pages/User/UserDashboardOverview";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
 

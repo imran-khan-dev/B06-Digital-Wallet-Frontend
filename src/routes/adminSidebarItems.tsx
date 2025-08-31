@@ -1,3 +1,4 @@
+import { AdminDashboardOverviewData } from "@/components/modules/admin/AdminDashboardOverviewData";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
@@ -11,6 +12,11 @@ export const adminSidebarItems: ISidebarItem[] = [
   {
     title: "Dashboard",
     items: [
+      {
+        title: "Overview",
+        url: "/admin/overview",
+        component: AdminDashboardOverviewData,
+      },
       {
         title: "Manage Users",
         url: "/admin/manage-users",

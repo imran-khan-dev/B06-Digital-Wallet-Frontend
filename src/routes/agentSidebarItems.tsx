@@ -1,4 +1,4 @@
-import AgentOverview from "@/pages/Agent/AgentOverview";
+import AgentOverview from "@/pages/Agent/AgentDashboardOverview";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
