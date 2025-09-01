@@ -68,6 +68,22 @@ export const authApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    withdrawMoney: builder.mutation({
+      query: (payload) => ({
+        url: "/wallet/withdraw-money",
+        method: "POST",
+        data: payload, // { agentID, amount }
+      }),
+      invalidatesTags: ["WALLET", "TRANSACTION"],
+    }),
+    sendMoney: builder.mutation({
+      query: (payload) => ({
+        url: "/wallet/send-money",
+        method: "POST",
+        data: payload, // { userID, amount }
+      }),
+      invalidatesTags: ["WALLET", "TRANSACTION"],
+    }),
   }),
 });
 
@@ -80,6 +96,8 @@ export const {
   useGetAllWalletQuery,
   useTransactionSumQuery,
   useGetMyRecentTransactionsQuery,
+  useWithdrawMoneyMutation,
+  useSendMoneyMutation,
   useLogoutMutation,
   useGetMyWalletQuery,
 } = authApi;

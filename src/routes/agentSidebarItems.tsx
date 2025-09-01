@@ -3,7 +3,7 @@ import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
 const TopUp = lazy(() => import("@/pages/Agent/TopUp"));
-const CashOut = lazy(() => import("@/pages/Agent/CashOut"));
+const CashOutAgent = lazy(() => import("@/pages/Agent/CashOutAgent"));
 const AgentTransactions = lazy(() => import("@/pages/Agent/AgentTransactions"));
 const AgentEditProfile = lazy(() => import("@/pages/Agent/AgentEditProfile"));
 
@@ -24,7 +24,7 @@ export const agentSidebarItems: ISidebarItem[] = [
       {
         title: "Cash Out for users",
         url: "/agent/cash-out-users",
-        component: CashOut,
+        component: CashOutAgent,
       },
       {
         title: "Agent Transaction List",
