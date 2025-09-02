@@ -1,4 +1,5 @@
 import { EditProfileForm } from "@/components/EditProfile";
+import Loading from "@/components/Loading";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 
 export default function UserEditProfile() {
@@ -6,7 +7,7 @@ export default function UserEditProfile() {
 
   const user = userData?.data;
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
 
   return (
     <div>

@@ -38,7 +38,7 @@ export const userSidebarItems: ISidebarItem[] = [
         component: UserTransactions,
       },
       {
-        title: "Edit Profile",
+        title: "Profile Management",
         url: "/user/edit-profile",
         component: UserEditProfile,
       },
