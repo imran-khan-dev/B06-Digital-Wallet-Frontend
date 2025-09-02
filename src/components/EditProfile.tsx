@@ -27,17 +27,20 @@ type FormValues = z.infer<typeof schema>;
 interface ProfileFormProps {
   user: {
     name: string;
+    email: string;
     phone: string;
+    role: string;
   };
 }
 
 export function EditProfileForm({ user }: ProfileFormProps) {
+  console.log("check user:", user);
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: user?.name ?? undefined,
-      phone: user?.phone ?? undefined,
-      password: undefined,
+      name: user?.name ?? "",
+      phone: user?.phone ?? "",
+      password: "",
     },
   });
 
@@ -47,7 +50,7 @@ export function EditProfileForm({ user }: ProfileFormProps) {
     try {
       await updateProfile(values).unwrap();
       toast.success("Profile updated successfully!");
-      form.reset({ ...values, password: "" }); // clear password after update
+      form.reset({ ...values, password: "" });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error(error?.data?.message || "Update failed");
@@ -56,65 +59,92 @@ export function EditProfileForm({ user }: ProfileFormProps) {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow rounded p-4">
-      <h2 className="text-lg font-bold mb-4">Edit Profile</h2>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          {/* Name */}
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter your name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+    <div className="max-w-5xl mx-auto p-6">
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">My Profile</h1>
 
-          {/* Phone */}
-          <FormField
-            control={form.control}
-            name="phone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Phone</FormLabel>
-                <FormControl>
-                  <Input placeholder="01XXXXXXXXX" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Profile Info Card */}
+        <div className="bg-white shadow-lg rounded-2xl p-6 border">
+          <h2 className="text-lg font-semibold mb-4">Profile Details</h2>
+          <div className="space-y-3 text-gray-700">
+            <p>
+              <span className="font-medium">Name:</span> {user?.name}
+            </p>
+            <p>
+              <span className="font-medium">Email:</span> {user?.email}
+            </p>
+            <p>
+              <span className="font-medium">Phone:</span>{" "}
+              {user?.phone || "Not set"}
+            </p>
+            <p>
+              <span className="font-medium">Role:</span>{" "}
+              {user?.role?.toUpperCase()}
+            </p>
+          </div>
+        </div>
 
-          {/* Password */}
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>New Password</FormLabel>
-                <FormControl>
-                  <Input
-                    type="password"
-                    placeholder="Leave blank to keep old password"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        {/* Edit Profile Form */}
+        <div className="bg-white shadow-lg rounded-2xl p-6 border">
+          <h2 className="text-lg font-semibold mb-4">Edit Profile</h2>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              {/* Name */}
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          {/* Submit */}
-          <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? "Updating..." : "Update Profile"}
-          </Button>
-        </form>
-      </Form>
+              {/* Phone */}
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone</FormLabel>
+                    <FormControl>
+                      <Input placeholder="01XXXXXXXXX" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Password */}
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>New Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="Leave blank to keep old password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button type="submit" disabled={isLoading} className="w-full">
+                {isLoading ? "Updating..." : "Update Profile"}
+              </Button>
+            </form>
+          </Form>
+        </div>
+      </div>
     </div>
   );
 }
