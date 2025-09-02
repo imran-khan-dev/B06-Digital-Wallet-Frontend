@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useWithdrawMoneyMutation } from "@/redux/features/auth/auth.api";
+import { useUpdateProfileMutation } from "@/redux/features/auth/auth.api";
 import {
   Form,
   FormControl,
@@ -16,73 +16,92 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-
 const schema = z.object({
-  agentID: z.string().min(1, "Agent phone or email is required"),
-  amount: z.number().min(10, "Minimum cashout is 10 BDT"),
+  name: z.string().optional(),
+  phone: z.string().optional(),
+  password: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
 
-export function CashOutForm() {
+interface ProfileFormProps {
+  user: {
+    name: string;
+    phone: string;
+  };
+}
+
+export function EditProfileForm({ user }: ProfileFormProps) {
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      agentID: "",
-      amount: 0,
+      name: user?.name ?? undefined,
+      phone: user?.phone ?? undefined,
+      password: undefined,
     },
   });
 
-  const [cashOut, { isLoading }] = useWithdrawMoneyMutation();
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
   const onSubmit = async (values: FormValues) => {
-    console.log(values);
     try {
-      await cashOut(values).unwrap();
-      toast.success("Cash out successful!");
-      form.reset();
+      await updateProfile(values).unwrap();
+      toast.success("Profile updated successfully!");
+      form.reset({ ...values, password: "" }); // clear password after update
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      toast.error(error?.data?.message || "Cash out failed");
+      toast.error(error?.data?.message || "Update failed");
+      console.error(error);
     }
   };
 
   return (
     <div className="max-w-md mx-auto bg-white shadow rounded p-4">
-      <h2 className="text-lg font-bold mb-4">Cash Out</h2>
+      <h2 className="text-lg font-bold mb-4">Edit Profile</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          {/* Agent ID */}
+          {/* Name */}
           <FormField
             control={form.control}
-            name="agentID"
+            name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Agent ID (Phone/Email)</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="example@gmail.com / 01XXXXXXXXX"
-                    {...field}
-                  />
+                  <Input placeholder="Enter your name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          {/* Amount */}
+          {/* Phone */}
           <FormField
             control={form.control}
-            name="amount"
+            name="phone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Amount</FormLabel>
+                <FormLabel>Phone</FormLabel>
+                <FormControl>
+                  <Input placeholder="01XXXXXXXXX" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Password */}
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>New Password</FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
-                    placeholder="Enter amount"
+                    type="password"
+                    placeholder="Leave blank to keep old password"
                     {...field}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
                   />
                 </FormControl>
                 <FormMessage />
@@ -92,7 +111,7 @@ export function CashOutForm() {
 
           {/* Submit */}
           <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? "Processing..." : "Cash Out"}
+            {isLoading ? "Updating..." : "Update Profile"}
           </Button>
         </form>
       </Form>

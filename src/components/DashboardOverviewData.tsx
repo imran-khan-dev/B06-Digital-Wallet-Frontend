@@ -38,7 +38,7 @@ export function DashboardOverviewData() {
             <p className="font-semibold text-gray-800">
               {walletData?.data.totalTransactions ?? 0}
             </p>
-            <p className="text-xs">Transactions</p>
+            <p className="text-xs break-words truncate">Transactions</p>
           </div>
           <div className="bg-green-50 rounded-lg p-3 text-center">
             <p className="font-semibold text-green-700">

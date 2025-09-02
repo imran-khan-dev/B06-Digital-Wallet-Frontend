@@ -99,6 +99,13 @@ export const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    updateProfile: builder.mutation({
+      query: (payload) => ({
+        url: "/user/update-profile",
+        method: "PATCH",
+        data: payload,
+      }),
+    }),
   }),
 });
 
@@ -116,4 +123,5 @@ export const {
   useSendMoneyMutation,
   useLogoutMutation,
   useGetMyWalletQuery,
+  useUpdateProfileMutation,
 } = authApi;

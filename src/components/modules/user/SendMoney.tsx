@@ -87,7 +87,7 @@ export function SendMoneyForm() {
             )}
           />
 
-          <Button type="submit" disabled={isLoading}>
+          <Button type="submit" disabled={isLoading} className="w-full">
             {isLoading ? "Sending..." : "Send Money"}
           </Button>
         </form>
