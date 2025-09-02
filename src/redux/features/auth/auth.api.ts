@@ -84,6 +84,21 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["WALLET", "TRANSACTION"],
     }),
+    getMyTransactions: builder.query({
+      query: ({ userId, type, fromDate, toDate, page = 1, limit = 5 }) => {
+        const params = new URLSearchParams();
+        params.append("page", page.toString());
+        params.append("limit", limit.toString());
+        if (type) params.append("type", type);
+        if (fromDate) params.append("fromDate", fromDate);
+        if (toDate) params.append("toDate", toDate);
+
+        return {
+          url: `/transaction/transaction-history/${userId}?${params.toString()}`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -96,6 +111,7 @@ export const {
   useGetAllWalletQuery,
   useTransactionSumQuery,
   useGetMyRecentTransactionsQuery,
+  useGetMyTransactionsQuery,
   useWithdrawMoneyMutation,
   useSendMoneyMutation,
   useLogoutMutation,
