@@ -2,7 +2,7 @@ import AgentOverview from "@/pages/Agent/AgentDashboardOverview";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
-const TopUp = lazy(() => import("@/pages/Agent/TopUp"));
+const TopUp = lazy(() => import("@/pages/Agent/CashIn"));
 const CashOutAgent = lazy(() => import("@/pages/Agent/CashOutAgent"));
 const AgentTransactions = lazy(() => import("@/pages/Agent/AgentTransactions"));
 const AgentEditProfile = lazy(() => import("@/pages/Agent/AgentEditProfile"));
@@ -17,8 +17,8 @@ export const agentSidebarItems: ISidebarItem[] = [
         component: AgentOverview,
       },
       {
-        title: "Top Up",
-        url: "/agent/top-up",
+        title: "Cash In",
+        url: "/agent/cash-in",
         component: TopUp,
       },
       {

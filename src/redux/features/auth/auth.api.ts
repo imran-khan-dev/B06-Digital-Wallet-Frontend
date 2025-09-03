@@ -72,7 +72,7 @@ export const authApi = baseApi.injectEndpoints({
       query: (payload) => ({
         url: "/wallet/withdraw-money",
         method: "POST",
-        data: payload, // { agentID, amount }
+        data: payload,
       }),
       invalidatesTags: ["WALLET", "TRANSACTION"],
     }),
@@ -80,7 +80,15 @@ export const authApi = baseApi.injectEndpoints({
       query: (payload) => ({
         url: "/wallet/send-money",
         method: "POST",
-        data: payload, // { userID, amount }
+        data: payload,
+      }),
+      invalidatesTags: ["WALLET", "TRANSACTION"],
+    }),
+    addMoney: builder.mutation({
+      query: (payload) => ({
+        url: "/wallet/add-money",
+        method: "POST",
+        data: payload,
       }),
       invalidatesTags: ["WALLET", "TRANSACTION"],
     }),
@@ -121,6 +129,7 @@ export const {
   useGetMyTransactionsQuery,
   useWithdrawMoneyMutation,
   useSendMoneyMutation,
+  useAddMoneyMutation,
   useLogoutMutation,
   useGetMyWalletQuery,
   useUpdateProfileMutation,
