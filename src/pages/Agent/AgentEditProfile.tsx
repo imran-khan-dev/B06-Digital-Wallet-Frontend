@@ -1,7 +1,17 @@
+import { EditProfileForm } from "@/components/EditProfile";
+import Loading from "@/components/Loading";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
+
 export default function AgentEditProfile() {
+  const { data: userData, isLoading } = useUserInfoQuery(undefined);
+
+  const user = userData?.data;
+
+  if (isLoading) return <Loading />;
+
   return (
     <div>
-      <h1>Agent Profile Edit here</h1>
+      <EditProfileForm user={user} />
     </div>
-  )
+  );
 }

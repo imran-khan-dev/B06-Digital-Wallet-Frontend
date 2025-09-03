@@ -1,7 +1,17 @@
+import Loading from "@/components/Loading";
+import TransactionHistory from "@/components/TransactionHistory";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
+
 export default function AgentTransactions() {
+  const { data: userData, isLoading } = useUserInfoQuery(undefined);
+
+  if (isLoading) return <Loading />;
+
+  const user = userData?.data;
+
   return (
     <div>
-      <h1>Agent's Transactions</h1>
+      <TransactionHistory user={user} />
     </div>
   );
 }

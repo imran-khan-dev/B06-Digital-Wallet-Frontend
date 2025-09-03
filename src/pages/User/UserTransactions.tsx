@@ -7,13 +7,11 @@ export default function UserTransactions() {
 
   if (isLoading) return <Loading />;
 
-  const userId = userData?.data?._id;
-
-  if (!userId) return <p>User not found</p>;
+  const user = userData?.data;
 
   return (
     <div>
-      <TransactionHistory userId={userId} />
+      <TransactionHistory user={user} />
     </div>
   );
 }

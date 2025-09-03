@@ -4,24 +4,28 @@ import { useGetMyTransactionsQuery } from "@/redux/features/auth/auth.api";
 import Loading from "./Loading";
 
 interface TransactionHistoryProps {
-  userId: string;
+  user: {
+    _id: string;
+    name: string;
+    email: string;
+    phone: string;
+    role: string;
+  };
 }
 
-const TransactionHistory: React.FC<TransactionHistoryProps> = ({ userId }) => {
-  const [page, setPage] = useState(1);
+const TransactionHistory: React.FC<TransactionHistoryProps> = ({ user }) => {
   const [filters, setFilters] = useState({
     type: "",
     fromDate: "",
     toDate: "",
-    page,
+    page: 1,
     limit: 5,
   });
 
+  const userId = user._id;
+
   const { data, isLoading } = useGetMyTransactionsQuery(
-    {
-      userId,
-      ...filters,
-    },
+    { userId, ...filters },
     { skip: !userId }
   );
 
@@ -32,10 +36,23 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ userId }) => {
   const meta = data?.data?.meta;
   const totalPages = meta ? Math.ceil(meta.total / meta.limit) : 1;
 
+  // --- Handlers ---
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setFilters({ ...filters, [e.target.name]: e.target.value, page: 1 });
+  };
+
+  const goPrev = () => {
+    if (filters.page > 1) {
+      setFilters((prev) => ({ ...prev, page: prev.page - 1 }));
+    }
+  };
+
+  const goNext = () => {
+    if (filters.page < totalPages) {
+      setFilters((prev) => ({ ...prev, page: prev.page + 1 }));
+    }
   };
 
   return (
@@ -83,7 +100,7 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ userId }) => {
               fromDate: "",
               toDate: "",
               page: 1,
-              limit: 10,
+              limit: 5,
             })
           }
           className="px-4 py-2 bg-gray-100 text-gray-600 text-sm rounded-lg hover:bg-gray-200 transition"
@@ -125,7 +142,16 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ userId }) => {
               {/* Middle: To / From */}
               <div className="flex-1 mt-2 sm:mt-0 sm:px-6">
                 <p className="text-sm text-gray-600">
-                  To: <span className="font-medium text-gray-800">{tx.to}</span>
+                  From:
+                  <span className="font-medium text-gray-800 ml-1">
+                    {user.email === tx.from ? "Me" : tx.from}
+                  </span>
+                </p>
+                <p className="text-sm text-gray-600">
+                  To:
+                  <span className="font-medium text-gray-800 ml-1">
+                    {user.email === tx.to ? "Me" : tx.to}
+                  </span>
                 </p>
               </div>
 
@@ -154,23 +180,21 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ userId }) => {
       {/* Pagination */}
       <div className="flex justify-center items-center gap-2 mt-6">
         <button
-          disabled={page === 1}
-          onClick={() => setPage((p) => p - 1)}
+          disabled={filters.page === 1}
+          onClick={goPrev}
           className="px-4 py-2 rounded-lg border text-sm bg-white shadow-sm disabled:opacity-50 hover:bg-gray-50 transition"
         >
           Prev
         </button>
 
         <span className="text-sm text-gray-600">
-          Page <span className="font-medium">{page}</span> of{" "}
+          Page <span className="font-medium">{filters.page}</span> of{" "}
           <span className="font-medium">{totalPages || 1}</span>
         </span>
 
         <button
-          disabled={page === totalPages}
-          onClick={() =>
-            setFilters((prev) => ({ ...prev, page: prev.page + 1 }))
-          }
+          disabled={filters.page === totalPages}
+          onClick={goNext}
           className="px-4 py-2 rounded-lg border text-sm bg-white shadow-sm disabled:opacity-50 hover:bg-gray-50 transition"
         >
           Next

@@ -71,31 +71,70 @@ export function DashboardOverviewData() {
           📑 Recent Transactions
         </h2>
 
-        <ul className="space-y-3">
-          {txData?.data?.data?.transactions?.length > 0 ? (
-            txData.data.data.transactions.slice(0, 5).map((tx: any) => (
-              <li
+        {txData?.data?.data?.transactions?.length > 0 ? (
+          <div className="grid gap-4">
+            {txData.data.data.transactions.slice(0, 5).map((tx: any) => (
+              <div
                 key={tx._id}
-                className="flex justify-between items-center bg-gray-50 rounded-lg p-3"
+                className="bg-gray-50 rounded-xl shadow-sm p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between hover:shadow-md transition-shadow"
               >
-                <span className="capitalize text-gray-700">
-                  {tx.type.replace("_", " ")}
-                </span>
-                <span
-                  className={`font-medium ${
-                    tx.type === "CASH_IN" || tx.type === "RECEIVE"
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                >
-                  {tx.amount} BDT
-                </span>
-              </li>
-            ))
-          ) : (
-            <p className="text-sm text-gray-500">No recent transactions</p>
-          )}
-        </ul>
+                {/* Left: Type & Date */}
+                <div className="flex items-center gap-3">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      tx.type === "SEND_MONEY"
+                        ? "bg-blue-100 text-blue-600"
+                        : tx.type === "CASH_IN" || tx.type === "RECEIVE"
+                        ? "bg-green-100 text-green-600"
+                        : "bg-red-100 text-red-600"
+                    }`}
+                  >
+                    {tx.type.replace("_", " ")}
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    {new Date(tx.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+
+                {/* Middle: From & To */}
+                <div className="flex-1 mt-2 sm:mt-0 sm:px-6">
+                  <p className="text-sm text-gray-600">
+                    From:
+                    <span className="font-medium text-gray-800 ml-1">
+                      {user?.data?.email === tx.from ? "Me" : tx.from}
+                    </span>
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    To:
+                    <span className="font-medium text-gray-800 ml-1">
+                      {user?.data?.email === tx.to ? "Me" : tx.to}
+                    </span>
+                  </p>
+                </div>
+
+                {/* Right: Amount & Status */}
+                <div className="flex flex-col items-end">
+                  <span className="text-lg font-semibold text-gray-900">
+                    ৳{tx.amount}
+                  </span>
+                  <span
+                    className={`text-xs mt-1 font-medium ${
+                      tx.status === "COMPLETED"
+                        ? "text-green-600"
+                        : tx.status === "PENDING"
+                        ? "text-yellow-600"
+                        : "text-red-600"
+                    }`}
+                  >
+                    {tx.status.toLowerCase()}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-gray-500">No recent transactions</p>
+        )}
 
         <div className="mt-4 text-right">
           <Link

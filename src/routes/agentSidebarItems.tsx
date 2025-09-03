@@ -27,8 +27,8 @@ export const agentSidebarItems: ISidebarItem[] = [
         component: CashOutAgent,
       },
       {
-        title: "Agent Transaction List",
-        url: "/agent/agent-transaction",
+        title: "Agent Transactions List",
+        url: "/agent/agent-transactions",
         component: AgentTransactions,
       },
       {
