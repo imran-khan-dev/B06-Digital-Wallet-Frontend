@@ -46,13 +46,21 @@ export function DashboardOverviewData() {
             <p className="font-semibold text-green-700">
               {walletData?.data.totalIn ?? 0}
             </p>
-            <p className="text-xs">Money In</p>
+            <p className="text-xs">
+              {userRole === "AGENT"
+                ? "Total Cash Out for User"
+                : "Cash In Total"}
+            </p>
           </div>
           <div className="bg-red-50 rounded-lg p-3 text-center">
             <p className="font-semibold text-red-700">
               {walletData?.data.totalOut ?? 0}
             </p>
-            <p className="text-xs">Money Out</p>
+            <p className="text-xs">
+              {userRole === "AGENT"
+                ? "Total Cash In to User"
+                : "Cash Out Total"}
+            </p>
           </div>
         </div>
       </div>
