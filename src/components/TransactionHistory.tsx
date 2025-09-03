@@ -40,7 +40,9 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ userId }) => {
 
   return (
     <div className="p-4">
-      {/* 🔍 Filter Form */}
+      <h2 className="text-lg font-bold mb-4">Transaction History</h2>
+
+      {/* Filter Form */}
       <div className="bg-white rounded-2xl shadow-md p-4 mb-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
         <div className="flex flex-col sm:flex-row gap-3">
           {/* Type Filter */}
@@ -90,7 +92,7 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ userId }) => {
         </button>
       </div>
 
-      {/* 🧾 Transactions List */}
+      {/* Transactions List */}
       {isLoading ? (
         <Loading text="Fetching History..." />
       ) : transactions.length === 0 ? (
@@ -149,7 +151,7 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ userId }) => {
         </div>
       )}
 
-      {/* 📄 Pagination */}
+      {/* Pagination */}
       <div className="flex justify-center items-center gap-2 mt-6">
         <button
           disabled={page === 1}

@@ -1,5 +1,3 @@
-"use client";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -15,11 +13,21 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { useLogoutUser } from "@/hooks/useLogoutUser";
 
 const schema = z.object({
-  name: z.string().optional(),
-  phone: z.string().optional(),
-  password: z.string().optional(),
+  name: z
+    .string()
+    .transform((val) => (val === "" ? undefined : val))
+    .optional(),
+  phone: z
+    .string()
+    .transform((val) => (val === "" ? undefined : val))
+    .optional(),
+  password: z
+    .string()
+    .transform((val) => (val === "" ? undefined : val))
+    .optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -34,13 +42,14 @@ interface ProfileFormProps {
 }
 
 export function EditProfileForm({ user }: ProfileFormProps) {
-  console.log("check user:", user);
+  const logoutUser = useLogoutUser();
+
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: user?.name ?? "",
-      phone: user?.phone ?? "",
-      password: "",
+      name: user?.name ?? undefined,
+      phone: user?.phone ?? undefined,
+      password: undefined,
     },
   });
 
@@ -64,24 +73,34 @@ export function EditProfileForm({ user }: ProfileFormProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Profile Info Card */}
-        <div className="bg-white shadow-lg rounded-2xl p-6 border">
-          <h2 className="text-lg font-semibold mb-4">Profile Details</h2>
-          <div className="space-y-3 text-gray-700">
-            <p>
-              <span className="font-medium">Name:</span> {user?.name}
-            </p>
-            <p>
-              <span className="font-medium">Email:</span> {user?.email}
-            </p>
-            <p>
-              <span className="font-medium">Phone:</span>{" "}
-              {user?.phone || "Not set"}
-            </p>
-            <p>
-              <span className="font-medium">Role:</span>{" "}
-              {user?.role?.toUpperCase()}
-            </p>
+        <div className="bg-white shadow-lg rounded-2xl p-6 border flex flex-col justify-between">
+          <div>
+            <h2 className="text-lg font-semibold mb-4">Profile Details</h2>
+            <div className="space-y-3 text-gray-700">
+              <p>
+                <span className="font-medium">Name:</span> {user?.name}
+              </p>
+              <p>
+                <span className="font-medium">Email:</span> {user?.email}
+              </p>
+              <p>
+                <span className="font-medium">Phone:</span>{" "}
+                {user?.phone || "Not set"}
+              </p>
+              <p>
+                <span className="font-medium">Role:</span>{" "}
+                {user?.role?.toUpperCase()}
+              </p>
+            </div>
           </div>
+
+          <Button
+            onClick={logoutUser}
+            variant="destructive"
+            className="w-full mt-6"
+          >
+            Logout
+          </Button>
         </div>
 
         {/* Edit Profile Form */}
