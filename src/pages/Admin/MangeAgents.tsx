@@ -1,7 +1,9 @@
+import ManageUsersData from "@/components/modules/admin/ManageUsersData";
+
 export default function MangeAgents() {
   return (
     <div>
-      <h1>Manage Agents</h1>
+      <ManageUsersData role="AGENT" />
     </div>
   );
 }

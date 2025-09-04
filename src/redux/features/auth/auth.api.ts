@@ -120,6 +120,14 @@ export const authApi = baseApi.injectEndpoints({
         data: payload,
       }),
     }),
+    updateUserByAdmin: builder.mutation({
+      query: ({ userId, payload }) => ({
+        url: `/user/update/${userId}`,
+        method: "PATCH",
+        data: payload,
+      }),
+      invalidatesTags: ["USER"],
+    }),
   }),
 });
 
@@ -140,4 +148,5 @@ export const {
   useLogoutMutation,
   useGetMyWalletQuery,
   useUpdateProfileMutation,
+  useUpdateUserByAdminMutation,
 } = authApi;

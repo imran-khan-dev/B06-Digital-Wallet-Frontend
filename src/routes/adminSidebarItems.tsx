@@ -4,7 +4,6 @@ import { lazy } from "react";
 
 const ManageUsers = lazy(() => import("@/pages/Admin/ManageUsers"));
 const MangeAgents = lazy(() => import("@/pages/Admin/MangeAgents"));
-const ManageWallets = lazy(() => import("@/pages/Admin/ManageWallets"));
 const EditProfile = lazy(() => import("@/pages/Admin/AdminEditProfile"));
 const AllTransactions = lazy(() => import("@/pages/Admin/AllTransactions"));
 
@@ -26,11 +25,6 @@ export const adminSidebarItems: ISidebarItem[] = [
         title: "Manage Agents",
         url: "/admin/manage-agents",
         component: MangeAgents,
-      },
-      {
-        title: "Manage Wallets",
-        url: "/admin/manage-wallets",
-        component: ManageWallets,
       },
       {
         title: "View All Transactions",

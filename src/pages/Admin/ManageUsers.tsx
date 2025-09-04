@@ -1,7 +1,9 @@
+import ManageUsersData from "@/components/modules/admin/ManageUsersData";
+
 export default function ManageUsers() {
   return (
     <div>
-      <h1>Manage Users</h1>
+      <ManageUsersData role="USER" />
     </div>
   );
 }
