@@ -56,6 +56,12 @@ export const authApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    transactionHistory: builder.query({
+      query: () => ({
+        url: "/transaction/transaction-history",
+        method: "GET",
+      }),
+    }),
     transactionSum: builder.query({
       query: () => ({
         url: "/transaction/transaction-sum",
@@ -124,6 +130,7 @@ export const {
   useAllUserInfoQuery,
   useAllAgentInfoQuery,
   useGetAllWalletQuery,
+  useTransactionHistoryQuery,
   useTransactionSumQuery,
   useGetMyRecentTransactionsQuery,
   useGetMyTransactionsQuery,
