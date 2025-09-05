@@ -64,7 +64,7 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ user }) => {
 
       {/* Filter Form */}
       <div className="bg-white rounded-2xl shadow-md p-4 mb-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-col sm:flex-row md:flex-wrap gap-3">
           {/* Search bar */}
           {user.role === "ADMIN" ? (
             <input
