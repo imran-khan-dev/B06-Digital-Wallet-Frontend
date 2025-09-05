@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from "react-router";
+import { createBrowserRouter } from "react-router";
 import App from "@/App";
 import About from "@/pages/About";
 import Login from "@/pages/Login";
@@ -12,6 +12,9 @@ import { withAuth } from "@/utils/withAuth";
 import type { TRole } from "@/types";
 import { role } from "@/constants/role";
 import { agentSidebarItems } from "./agentSidebarItems";
+import UserOverview from "@/pages/User/UserDashboardOverview";
+import AdminDashboardOverview from "@/pages/Admin/AdminDashboardOverview";
+import AgentOverview from "@/pages/Agent/AgentDashboardOverview";
 
 export const router = createBrowserRouter([
   {
@@ -36,7 +39,7 @@ export const router = createBrowserRouter([
     Component: withAuth(DashboardLayout, role.admin as TRole),
     path: "/admin",
     children: [
-      { index: true, element: <Navigate to="/admin/overview" /> },
+      { index: true, element: <AdminDashboardOverview /> },
       ...generateRoutes(adminSidebarItems),
     ],
   },
@@ -44,7 +47,7 @@ export const router = createBrowserRouter([
     Component: withAuth(DashboardLayout, role.user as TRole),
     path: "/user",
     children: [
-      { index: true, element: <Navigate to="/user/overview" /> },
+      { index: true, element: <UserOverview /> },
       ...generateRoutes(userSidebarItems),
     ],
   },
@@ -52,7 +55,7 @@ export const router = createBrowserRouter([
     Component: withAuth(DashboardLayout, role.agent as TRole),
     path: "/agent",
     children: [
-      { index: true, element: <Navigate to="/agent/overview" /> },
+      { index: true, element: <AgentOverview /> },
       ...generateRoutes(agentSidebarItems),
     ],
   },
