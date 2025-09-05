@@ -37,7 +37,7 @@ export function LoginForm({
       console.error(err);
 
       if (err.status === 401) {
-        toast.error("Your account is not verified");
+        toast.error("Password doesn't match");
       }
     }
   };
