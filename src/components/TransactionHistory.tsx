@@ -153,7 +153,7 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ user }) => {
               maxAmount: "",
             })
           }
-          className="px-4 py-2 bg-gray-100 text-gray-600 text-sm rounded-lg hover:bg-gray-200 transition"
+          className="px-4 py-2 bg-gray-100 text-gray-600 text-sm rounded-lg hover:bg-gray-200 transition cursor-pointer"
         >
           Reset
         </button>
@@ -232,7 +232,7 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ user }) => {
         <button
           disabled={filters.page === 1}
           onClick={goPrev}
-          className="px-4 py-2 rounded-lg border text-sm bg-white shadow-sm disabled:opacity-50 hover:bg-gray-50 transition"
+          className="px-4 py-2 rounded-lg border text-sm bg-white shadow-sm disabled:opacity-50 hover:bg-gray-50 transition cursor-pointer"
         >
           Prev
         </button>
@@ -245,7 +245,7 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ user }) => {
         <button
           disabled={filters.page === totalPages}
           onClick={goNext}
-          className="px-4 py-2 rounded-lg border text-sm bg-white shadow-sm disabled:opacity-50 hover:bg-gray-50 transition"
+          className="px-4 py-2 rounded-lg border text-sm bg-white shadow-sm disabled:opacity-50 hover:bg-gray-50 transition cursor-pointer"
         >
           Next
         </button>

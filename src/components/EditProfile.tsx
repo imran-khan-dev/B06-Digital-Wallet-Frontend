@@ -97,7 +97,7 @@ export function EditProfileForm({ user }: ProfileFormProps) {
           <Button
             onClick={logoutUser}
             variant="destructive"
-            className="w-full mt-6"
+            className="w-full mt-6 cursor-pointer"
           >
             Logout
           </Button>
@@ -157,7 +157,7 @@ export function EditProfileForm({ user }: ProfileFormProps) {
                 )}
               />
 
-              <Button type="submit" disabled={isLoading} className="w-full">
+              <Button type="submit" disabled={isLoading} className="w-full cursor-pointer">
                 {isLoading ? "Updating..." : "Update Profile"}
               </Button>
             </form>

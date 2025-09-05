@@ -55,7 +55,7 @@ export default function Component() {
           <Popover>
             <PopoverTrigger asChild>
               <Button
-                className="group size-8 md:hidden"
+                className="group size-8 md:hidden cursor-pointer"
                 variant="ghost"
                 size="icon"
               >
@@ -166,7 +166,7 @@ export default function Component() {
             </Button>
           )}
           {!data?.data?.email && (
-            <Button asChild className="text-sm">
+            <Button asChild className="text-sm cursor-pointer">
               <Link to="/login">Login</Link>
             </Button>
           )}

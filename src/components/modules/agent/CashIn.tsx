@@ -87,7 +87,7 @@ export function CashInForm() {
           />
 
           {/* Submit */}
-          <Button type="submit" disabled={isLoading} className="w-full">
+          <Button type="submit" disabled={isLoading} className="w-full cursor-pointer">
             {isLoading ? "Processing..." : "Cash In"}
           </Button>
         </form>
