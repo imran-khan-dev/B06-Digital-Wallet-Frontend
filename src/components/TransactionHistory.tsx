@@ -16,6 +16,10 @@ interface TransactionHistoryProps {
 const TransactionHistory: React.FC<TransactionHistoryProps> = ({ user }) => {
   const [filters, setFilters] = useState({
     type: "",
+    status: "",
+    search: "",
+    minAmount: "",
+    maxAmount: "",
     fromDate: "",
     toDate: "",
     page: 1,
@@ -36,7 +40,6 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ user }) => {
   const meta = data?.data?.meta;
   const totalPages = meta ? Math.ceil(meta.total / meta.limit) : 1;
 
-  // --- Handlers ---
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -62,6 +65,49 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ user }) => {
       {/* Filter Form */}
       <div className="bg-white rounded-2xl shadow-md p-4 mb-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
         <div className="flex flex-col sm:flex-row gap-3">
+          {/* Search bar */}
+          {user.role === "ADMIN" ? (
+            <input
+              type="text"
+              name="search"
+              placeholder="Search by email"
+              value={filters.search}
+              onChange={handleChange}
+              className="px-3 py-2 rounded-lg border border-gray-300 text-sm"
+            />
+          ) : null}
+
+          {/* Status filter */}
+          <select
+            name="status"
+            value={filters.status}
+            onChange={handleChange}
+            className="px-3 py-2 rounded-lg border border-gray-300 text-sm"
+          >
+            <option value="">All Status</option>
+            <option value="completed">Completed</option>
+            <option value="pending">Pending</option>
+            <option value="failed">Failed</option>
+          </select>
+
+          {/* Amount range */}
+          <input
+            type="number"
+            name="minAmount"
+            placeholder="Min"
+            value={filters.minAmount}
+            onChange={handleChange}
+            className="w-20 px-2 py-1 rounded-lg border border-gray-300 text-sm"
+          />
+          <input
+            type="number"
+            name="maxAmount"
+            placeholder="Max"
+            value={filters.maxAmount}
+            onChange={handleChange}
+            className="w-20 px-2 py-1 rounded-lg border border-gray-300 text-sm"
+          />
+
           {/* Type Filter */}
           <select
             name="type"
@@ -101,6 +147,10 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ user }) => {
               toDate: "",
               page: 1,
               limit: 5,
+              search: "",
+              status: "",
+              minAmount: "",
+              maxAmount: "",
             })
           }
           className="px-4 py-2 bg-gray-100 text-gray-600 text-sm rounded-lg hover:bg-gray-200 transition"

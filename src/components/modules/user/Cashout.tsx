@@ -34,7 +34,6 @@ export function CashOutForm() {
   const [cashOut, { isLoading }] = useWithdrawMoneyMutation();
 
   const onSubmit = async (values: FormValues) => {
-    console.log(values);
     try {
       await cashOut(values).unwrap();
       toast.success("Cash out successful!");

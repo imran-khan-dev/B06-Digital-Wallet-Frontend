@@ -12,8 +12,6 @@ export function DashboardOverviewData() {
   const { data: walletData, isLoading: walletLoading } =
     useGetMyWalletQuery(undefined);
 
-  console.log(walletData);
-
   const userId = user?.data?._id;
   const userRole = user?.data?.role;
   const { data: txData, isLoading: txLoading } =

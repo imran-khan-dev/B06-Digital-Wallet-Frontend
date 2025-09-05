@@ -33,7 +33,6 @@ export function SendMoneyForm() {
   const [sendMoney, { isLoading }] = useSendMoneyMutation();
 
   const onSubmit = async (values: FormValues) => {
-    console.log(values);
     try {
       await sendMoney(values).unwrap();
       toast.success("Money sent successfully!");

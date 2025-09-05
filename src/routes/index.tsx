@@ -13,8 +13,6 @@ import type { TRole } from "@/types";
 import { role } from "@/constants/role";
 import { agentSidebarItems } from "./agentSidebarItems";
 
-console.log(agentSidebarItems);
-
 export const router = createBrowserRouter([
   {
     Component: App,

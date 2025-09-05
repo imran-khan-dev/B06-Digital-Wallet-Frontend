@@ -88,7 +88,6 @@ export function RegisterForm({
       password: data.password,
     };
 
-    console.log(userInfo)
     try {
       const result = await register(userInfo).unwrap();
       toast.success("User created successfully");

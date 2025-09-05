@@ -33,7 +33,6 @@ const navigationLinks = [
 export default function Component() {
   const { data } = useUserInfoQuery(undefined);
   const dispatch = useAppDispatch();
-  console.log(data);
 
   const [logout] = useLogoutMutation();
 

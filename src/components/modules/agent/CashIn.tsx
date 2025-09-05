@@ -33,7 +33,6 @@ export function CashInForm() {
   const [addMoney, { isLoading }] = useAddMoneyMutation();
 
   const onSubmit = async (values: FormValues) => {
-    console.log(values);
     try {
       await addMoney(values).unwrap();
       toast.success("Cash-in successful!");

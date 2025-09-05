@@ -99,13 +99,28 @@ export const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["WALLET", "TRANSACTION"],
     }),
     getMyTransactions: builder.query({
-      query: ({ userId, type, fromDate, toDate, page = 1, limit = 5 }) => {
+      query: ({
+        userId,
+        type,
+        fromDate,
+        toDate,
+        page = 1,
+        limit = 5,
+        search,
+        status,
+        minAmount,
+        maxAmount,
+      }) => {
         const params = new URLSearchParams();
         params.append("page", page.toString());
         params.append("limit", limit.toString());
         if (type) params.append("type", type);
         if (fromDate) params.append("fromDate", fromDate);
         if (toDate) params.append("toDate", toDate);
+        if (search) params.append("search", search);
+        if (status) params.append("status", status);
+        if (minAmount) params.append("minAmount", minAmount);
+        if (maxAmount) params.append("maxAmount", maxAmount);
 
         return {
           url: `/transaction/transaction-history/${userId}?${params.toString()}`,

@@ -32,7 +32,7 @@ export const adminSidebarItems: ISidebarItem[] = [
         component: AllTransactions,
       },
       {
-        title: "Edit Profile",
+        title: "Profile Management",
         url: "/admin/edit-profile",
         component: EditProfile,
       },
