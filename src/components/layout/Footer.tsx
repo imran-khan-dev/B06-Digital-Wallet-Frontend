@@ -1,4 +1,5 @@
 import Logo from "@/assets/Logo";
+import { Link } from "react-router";
 
 export default function Footer() {
   return (
@@ -15,53 +16,53 @@ export default function Footer() {
 
         <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
           <li>
-            <a
+            <Link
               className="text-gray-700 transition hover:text-gray-700/75"
-              href="#"
+              to="/about"
             >
               {" "}
               About{" "}
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a
+            <Link
               className="text-gray-700 transition hover:text-gray-700/75"
-              href="#"
+              to="/features"
             >
               {" "}
               Features{" "}
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a
+            <Link
               className="text-gray-700 transition hover:text-gray-700/75"
-              href="#"
+              to="/pricing"
             >
               {" "}
               Pricing{" "}
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a
+            <Link
               className="text-gray-700 transition hover:text-gray-700/75"
-              href="#"
+              to="/contact"
             >
               {" "}
               Contact{" "}
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a
+            <Link
               className="text-gray-700 transition hover:text-gray-700/75"
-              href="#"
+              to="/faq"
             >
               {" "}
               FAQ{" "}
-            </a>
+            </Link>
           </li>
         </ul>
 

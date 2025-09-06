@@ -16,6 +16,10 @@ import UserOverview from "@/pages/User/UserDashboardOverview";
 import AdminDashboardOverview from "@/pages/Admin/AdminDashboardOverview";
 import AgentOverview from "@/pages/Agent/AgentDashboardOverview";
 import Homepage from "@/pages/Homepage";
+import Features from "@/pages/Features";
+import Pricing from "@/pages/Pricing";
+import Contact from "@/pages/Contact";
+import FAQPage from "@/pages/FAQ";
 
 export const router = createBrowserRouter([
   {
@@ -28,7 +32,23 @@ export const router = createBrowserRouter([
       },
       {
         Component: About,
-        path: "about",
+        path: "/about",
+      },
+      {
+        Component: Features,
+        path: "/features",
+      },
+      {
+        Component: Pricing,
+        path: "/pricing",
+      },
+      {
+        Component: FAQPage,
+        path: "/faq",
+      },
+      {
+        Component: Contact,
+        path: "/contact",
       },
     ],
   },
