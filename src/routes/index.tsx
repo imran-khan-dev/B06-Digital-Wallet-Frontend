@@ -15,12 +15,17 @@ import { agentSidebarItems } from "./agentSidebarItems";
 import UserOverview from "@/pages/User/UserDashboardOverview";
 import AdminDashboardOverview from "@/pages/Admin/AdminDashboardOverview";
 import AgentOverview from "@/pages/Agent/AgentDashboardOverview";
+import Homepage from "@/pages/Homepage";
 
 export const router = createBrowserRouter([
   {
     Component: App,
     path: "/",
     children: [
+      {
+        Component: Homepage,
+        index: true,
+      },
       {
         Component: About,
         path: "about",

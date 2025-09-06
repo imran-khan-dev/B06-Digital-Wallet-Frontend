@@ -15,7 +15,7 @@ import Password from "@/components/ui/Password";
 
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export function LoginForm({
   className,
@@ -98,6 +98,14 @@ export function LoginForm({
           </div>
         </CardContent>
       </Card>
+
+      <div className="flex justify-start">
+        <Link to="/">
+          <Button variant="outline" className="mb-4">
+            Home
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }

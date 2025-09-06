@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/select";
 import { useRegisterMutation } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
+import { Link } from "react-router";
 
 const registerSchema = z
   .object({
@@ -250,6 +251,14 @@ export function RegisterForm({
           </div>
         </CardContent>
       </Card>
+
+      <div className="flex justify-start">
+        <Link to="/">
+          <Button variant="outline" className="mb-4">
+            Home
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }
