@@ -11,7 +11,11 @@ import Logo from "@/assets/Logo";
 import { role } from "@/constants/role";
 import { useAppDispatch } from "@/redux/hooks";
 import { toast } from "sonner";
-import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api";
+import {
+  authApi,
+  useLogoutMutation,
+  useUserInfoQuery,
+} from "@/redux/features/auth/auth.api";
 
 const navigationLinks = [
   { href: "/", label: "Home", role: "PUBLIC" },
@@ -70,28 +74,17 @@ export default function Navbar() {
             </SheetTrigger>
             <SheetContent side="left" className="w-64 p-6">
               <nav className="flex flex-col gap-4">
-                {navigationLinks.map((link, index) => (
-                  <>
-                    {link.role === "PUBLIC" && (
-                      <Link
-                        key={index}
-                        to={link.href}
-                        className="text-gray-700 font-medium hover:text-primary"
-                      >
-                        {link.label}
-                      </Link>
-                    )}
-                    {link.role === data?.data?.role && (
-                      <Link
-                        key={index}
-                        to={link.href}
-                        className="text-gray-700 font-medium hover:text-primary"
-                      >
-                        {link.label}
-                      </Link>
-                    )}
-                  </>
-                ))}
+                {navigationLinks.map((link) =>
+                  link.role === "PUBLIC" || link.role === data?.data?.role ? (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      className="text-gray-700 font-medium hover:text-primary"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : null
+                )}
                 {data?.data?.email ? (
                   <Button
                     onClick={handleLogout}
@@ -109,38 +102,25 @@ export default function Navbar() {
             </SheetContent>
           </Sheet>
 
-          {/* Logo */}
+          {/* Logo + Desktop nav */}
           <div className="flex items-center gap-6">
             <Link to="/" className="text-primary hover:text-primary/90">
               <Logo />
             </Link>
-            {/* Desktop nav */}
             <NavigationMenu className="max-md:hidden">
               <NavigationMenuList className="gap-2">
-                {navigationLinks.map((link, index) => (
-                  <>
-                    {link.role === "PUBLIC" && (
-                      <NavigationMenuItem key={index}>
-                        <NavigationMenuLink
-                          asChild
-                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                        >
-                          <Link to={link.href}>{link.label}</Link>
-                        </NavigationMenuLink>
-                      </NavigationMenuItem>
-                    )}
-                    {link.role === data?.data?.role && (
-                      <NavigationMenuItem key={index}>
-                        <NavigationMenuLink
-                          asChild
-                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                        >
-                          <Link to={link.href}>{link.label}</Link>
-                        </NavigationMenuLink>
-                      </NavigationMenuItem>
-                    )}
-                  </>
-                ))}
+                {navigationLinks.map((link) =>
+                  link.role === "PUBLIC" || link.role === data?.data?.role ? (
+                    <NavigationMenuItem key={link.href}>
+                      <NavigationMenuLink
+                        asChild
+                        className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                      >
+                        <Link to={link.href}>{link.label}</Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                  ) : null
+                )}
               </NavigationMenuList>
             </NavigationMenu>
           </div>
@@ -148,7 +128,7 @@ export default function Navbar() {
 
         {/* Right side */}
         <div className="hidden md:flex items-center gap-2">
-          {data?.data?.email && (
+          {data?.data?.email ? (
             <Button
               onClick={handleLogout}
               variant="outline"
@@ -156,8 +136,7 @@ export default function Navbar() {
             >
               Logout
             </Button>
-          )}
-          {!data?.data?.email && (
+          ) : (
             <Button asChild className="text-sm cursor-pointer">
               <Link to="/login">Login</Link>
             </Button>
