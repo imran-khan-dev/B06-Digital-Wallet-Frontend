@@ -11,8 +11,7 @@ import Logo from "@/assets/Logo";
 import { role } from "@/constants/role";
 import { useAppDispatch } from "@/redux/hooks";
 import { toast } from "sonner";
-import { useUserInfoQuery } from "@/redux/features/user/user.api";
-import { authApi, useLogoutMutation } from "@/redux/features/auth/auth.api";
+import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api";
 
 const navigationLinks = [
   { href: "/", label: "Home", role: "PUBLIC" },

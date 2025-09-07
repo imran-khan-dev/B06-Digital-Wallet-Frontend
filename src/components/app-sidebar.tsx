@@ -12,9 +12,9 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { Link } from "react-router";
-import { useUserInfoQuery } from "@/redux/features/user/user.api";
 import { getSidebarItems } from "@/utils/getSidebarItems";
 import Logo from "@/assets/Logo";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: userData } = useUserInfoQuery(undefined);

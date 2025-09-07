@@ -2,14 +2,6 @@ import { baseApi } from "@/redux/baseApi";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    userInfo: builder.query({
-      query: () => ({
-        url: "/user/me",
-        method: "GET",
-        credentials: "include",
-      }),
-      providesTags: ["USER"],
-    }),
     allUserInfo: builder.query({
       query: () => ({
         url: "/user/all-users",
@@ -43,7 +35,6 @@ export const authApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useUserInfoQuery,
   useAllUserInfoQuery,
   useAllAgentInfoQuery,
   useUpdateProfileMutation,

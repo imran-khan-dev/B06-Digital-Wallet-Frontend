@@ -1,6 +1,6 @@
 import Loading from "@/components/Loading";
 import TransactionHistory from "@/components/TransactionHistory";
-import { useUserInfoQuery } from "@/redux/features/user/user.api";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 
 export default function AllTransactions() {
   const { data: userData, isLoading } = useUserInfoQuery(undefined);
