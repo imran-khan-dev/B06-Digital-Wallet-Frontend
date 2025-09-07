@@ -11,7 +11,7 @@ import {
   FormMessage,
   FormControl,
 } from "@/components/ui/form";
-import { useSendMoneyMutation } from "@/redux/features/auth/auth.api";
+import { useSendMoneyMutation } from "@/redux/features/wallet/wallet.api";
 import { toast } from "sonner";
 
 const schema = z.object({
@@ -84,7 +84,11 @@ export function SendMoneyForm() {
             )}
           />
 
-          <Button type="submit" disabled={isLoading} className="w-full cursor-pointer">
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full cursor-pointer"
+          >
             {isLoading ? "Sending..." : "Send Money"}
           </Button>
         </form>

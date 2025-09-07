@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useAddMoneyMutation } from "@/redux/features/auth/auth.api";
+import { useAddMoneyMutation } from "@/redux/features/wallet/wallet.api";
 import {
   Form,
   FormControl,
@@ -87,7 +87,11 @@ export function CashInForm() {
           />
 
           {/* Submit */}
-          <Button type="submit" disabled={isLoading} className="w-full cursor-pointer">
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full cursor-pointer"
+          >
             {isLoading ? "Processing..." : "Cash In"}
           </Button>
         </form>

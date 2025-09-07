@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { useGetMyTransactionsQuery } from "@/redux/features/auth/auth.api";
+import { useGetMyTransactionsQuery } from "@/redux/features/transaction/transaction.api";
 import Loading from "./Loading";
 
 interface TransactionHistoryProps {

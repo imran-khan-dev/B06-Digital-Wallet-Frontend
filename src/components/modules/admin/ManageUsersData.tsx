@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  useAllUserInfoQuery,
-  useAllAgentInfoQuery,
-  useUpdateUserByAdminMutation,
-} from "@/redux/features/auth/auth.api";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import Loading from "@/components/Loading";
+import {
+  useAllAgentInfoQuery,
+  useAllUserInfoQuery,
+  useUpdateUserByAdminMutation,
+} from "@/redux/features/user/user.api";
 
 interface ManageUsersDataProps {
   role: "USER" | "AGENT";

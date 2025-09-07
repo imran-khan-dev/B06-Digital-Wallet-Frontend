@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  useGetMyWalletQuery,
-  useGetMyRecentTransactionsQuery,
-  useUserInfoQuery,
-} from "@/redux/features/auth/auth.api";
 import { Link } from "react-router";
 import Loading from "./Loading";
+import { useUserInfoQuery } from "@/redux/features/user/user.api";
+import { useGetMyWalletQuery } from "@/redux/features/wallet/wallet.api";
+import { useGetMyRecentTransactionsQuery } from "@/redux/features/transaction/transaction.api";
 
 export function DashboardOverviewData() {
   const { data: user, isLoading: userLoading } = useUserInfoQuery(undefined);

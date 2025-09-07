@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useWithdrawMoneyMutation } from "@/redux/features/auth/auth.api";
+import { useWithdrawMoneyMutation } from "@/redux/features/wallet/wallet.api";
 import {
   Form,
   FormControl,
@@ -13,7 +13,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-
 
 const schema = z.object({
   agentID: z.string().min(1, "Agent phone or email is required"),
@@ -88,7 +87,11 @@ export function CashOutForm() {
           />
 
           {/* Submit */}
-          <Button type="submit" disabled={isLoading} className="w-full cursor-pointer">
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full cursor-pointer"
+          >
             {isLoading ? "Processing..." : "Cash Out"}
           </Button>
         </form>

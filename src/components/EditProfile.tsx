@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useUpdateProfileMutation } from "@/redux/features/auth/auth.api";
+import { useUpdateProfileMutation } from "@/redux/features/user/user.api";
 import {
   Form,
   FormControl,
@@ -157,7 +157,11 @@ export function EditProfileForm({ user }: ProfileFormProps) {
                 )}
               />
 
-              <Button type="submit" disabled={isLoading} className="w-full cursor-pointer">
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full cursor-pointer"
+              >
                 {isLoading ? "Updating..." : "Update Profile"}
               </Button>
             </form>

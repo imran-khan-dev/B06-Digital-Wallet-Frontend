@@ -1,11 +1,13 @@
 import Loading from "@/components/Loading";
 import {
-  useAllUserInfoQuery,
-  useAllAgentInfoQuery,
-  useGetAllWalletQuery,
-  useTransactionSumQuery,
   useTransactionHistoryQuery,
-} from "@/redux/features/auth/auth.api";
+  useTransactionSumQuery,
+} from "@/redux/features/transaction/transaction.api";
+import {
+  useAllAgentInfoQuery,
+  useAllUserInfoQuery,
+} from "@/redux/features/user/user.api";
+import { useGetAllWalletQuery } from "@/redux/features/wallet/wallet.api";
 import { Users, UserCheck, Wallet, Receipt, BarChart3 } from "lucide-react";
 
 export function AdminDashboardOverviewData() {
