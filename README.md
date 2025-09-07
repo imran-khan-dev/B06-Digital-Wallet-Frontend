@@ -10,7 +10,7 @@ This project is built following **Clean Architecture principles** for scalabilit
 
 ## 🚀 Live Demo
 
-🔗 [Live URL](https://.com)
+🔗 [Live URL](https://b06-digital-wallet-frontend-uw8n.vercel.app/)
 
 ---
 
@@ -29,7 +29,7 @@ This project is built following **Clean Architecture principles** for scalabilit
 ### 1. Clone the Repository
 
 ```bash
- git clone https://github.com/
+ git clone https://github.com/imran-khan-dev/B06-Digital-Wallet-Frontend
  cd digital-wallet
 ```
 
@@ -65,7 +65,7 @@ Navigate to the frontend folder:
 
 ### 6. Access the App
 
-Visit: `http://localhost:5173`
+Visit: `https://b06-digital-wallet-frontend-uw8n.vercel.app/`
 
 ---
 
