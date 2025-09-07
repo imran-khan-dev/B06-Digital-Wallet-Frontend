@@ -32,7 +32,7 @@ export const agentSidebarItems: ISidebarItem[] = [
         component: AgentTransactions,
       },
       {
-        title: "Edit Profile",
+        title: "Profile Management",
         url: "/agent/edit-profile",
         component: AgentEditProfile,
       },
